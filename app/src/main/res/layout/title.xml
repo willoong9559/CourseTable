@@ -19,11 +19,12 @@
         />
 
     <TextView
+        android:id="@+id/riqi"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_toRightOf="@id/zuog"
-        android:layout_centerVertical="true"
-        android:text="  7月23日"
+        android:layout_marginLeft="10dp"
+        android:text="0月0日"
         android:textSize="25dp"
         />
 

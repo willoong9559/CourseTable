@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        >
+
+
+    <Button
+        android:id="@+id/zuog"
+        android:layout_width="5dp"
+        android:layout_height="26dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/zuog"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_toRightOf="@id/zuog"
+        android:layout_centerVertical="true"
+        android:text="  7月23日"
+        android:textSize="25dp"
+        />
+
+    <Button
+        android:id="@+id/youg"
+        android:layout_width="20dp"
+        android:layout_centerVertical="true"
+        android:layout_height="26dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/youg"
+        />
+
+    <Button
+        android:id="@+id/fenxiang"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_toLeftOf="@id/youg"
+        android:layout_marginLeft="5dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/fenxiang"
+        />
+
+    <Button
+        android:id="@+id/daoru"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/daoru"
+        android:layout_marginLeft="5dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/fenxiang"
+        />
+
+    <Button
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_toLeftOf="@id/daoru"
+        android:layout_marginLeft="5dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/addcourse"
+        />
+
+    </RelativeLayout>
+
+</LinearLayout>

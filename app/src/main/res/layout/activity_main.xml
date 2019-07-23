@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <!--背景图-->
     <ImageView
         android:layout_width="match_parent"
@@ -10,10 +12,11 @@
         android:scaleType="centerCrop"
         android:src="@drawable/bg" />
 
+    <include layout="@layout/title"/>
     <!--星期条-->
     <LinearLayout
+        android:layout_below="@id/title"
         android:id="@+id/xingqitiao"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >

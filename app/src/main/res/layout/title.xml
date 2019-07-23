@@ -30,7 +30,7 @@
 
     <Button
         android:id="@+id/youg"
-        android:layout_width="20dp"
+        android:layout_width="30dp"
         android:layout_centerVertical="true"
         android:layout_height="26dp"
         android:layout_alignParentRight="true"
@@ -42,7 +42,7 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_toLeftOf="@id/youg"
-        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_centerVertical="true"
         android:background="@drawable/fenxiang"
         />
@@ -52,16 +52,17 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:background="@drawable/daoru"
-        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/fenxiang"
         />
 
     <Button
+        android:id="@+id/tianjia"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_toLeftOf="@id/daoru"
-        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_centerVertical="true"
         android:background="@drawable/addcourse"
         />

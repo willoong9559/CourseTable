@@ -4,6 +4,8 @@ public class Course {
 
     private String coursename;
 
+    private int day;
+
     private int course_start;
 
     private int course_end;
@@ -18,6 +20,14 @@ public class Course {
 
     public void setCoursename(String coursename) {
         this.coursename = coursename;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
     }
 
     public int getCourse_start() {

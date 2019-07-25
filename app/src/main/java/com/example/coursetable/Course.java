@@ -1,8 +1,10 @@
 package com.example.coursetable;
 
-public class Course {
+import org.litepal.crud.LitePalSupport;
 
-    private String coursename;
+public class Course extends LitePalSupport {
+
+    private String course_name;
 
     private int day;
 
@@ -10,16 +12,16 @@ public class Course {
 
     private int course_end;
 
-    private int classroom;
+    private String classroom;
 
     private String teacher_name;
 
-    public String getCoursename() {
-        return coursename;
+    public String getCourse_name() {
+        return course_name;
     }
 
-    public void setCoursename(String coursename) {
-        this.coursename = coursename;
+    public void setCourse_name(String classname) {
+        this.course_name = classname;
     }
 
     public int getDay() {
@@ -46,11 +48,11 @@ public class Course {
         this.course_end = course_end;
     }
 
-    public int getClassroom() {
+    public String getClassroom() {
         return classroom;
     }
 
-    public void setClassroom(int classroom) {
+    public void setClassroom(String classroom) {
         this.classroom = classroom;
     }
 

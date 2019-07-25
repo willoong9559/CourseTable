@@ -5,31 +5,51 @@
     android:layout_height="match_parent">
 
     <EditText
+        android:id="@+id/course_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
 
     <EditText
+        android:id="@+id/day"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="day"
         />
 
     <EditText
+        android:id="@+id/course_start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="course_start"
         />
 
     <EditText
+        android:id="@+id/course_end"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="course_end"
         />
 
     <EditText
+        android:id="@+id/classroom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="classroom"
+        />
+
+    <EditText
+        android:id="@+id/teacher_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="teacher_name"
         />
 
     <Button
+        android:id="@+id/add_course"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Send"

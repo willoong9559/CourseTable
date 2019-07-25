@@ -5,12 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.litepal.LitePal;
+import org.litepal.crud.LitePalSupport;
+
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,8 +39,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fenxiang.setOnClickListener(this);
         youg.setOnClickListener(this);
 
-        //从数据库中加载数据
-        //loadData();
+        //从数据库中读取数据
+        loadData();
+        //craeteCourseView(); //test校参
+
 
         //工具条隐藏
         ActionBar actionBar = getSupportActionBar();
@@ -70,5 +80,60 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.fenxiang :
                 Toast.makeText(MainActivity.this, "傻子，这还没写呢！！！", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void loadData() {
+        List<Course> courses = LitePal.findAll(Course.class);
+
+        for (Course course : courses) {
+            //动态设定并加载view
+            craeteCourseView(course);
+        }
+    }
+    //Course course
+    private void craeteCourseView(Course course) {
+        int getDay = course.getDay();
+        if (getDay < 1 || getDay > 7 || course.getCourse_start() > course.getCourse_end()) {
+            Toast.makeText(MainActivity.this, "emm...请不要输入错误的数据", Toast.LENGTH_SHORT).show();
+        } else {
+            int dayId = 0;
+            switch (getDay) {
+                case 1:
+                    dayId = R.id.monday;
+                    break;
+                case 2:
+                    dayId = R.id.tuesday;
+                    break;
+                case 3:
+                    dayId = R.id.wednesday;
+                    break;
+                case 4:
+                    dayId = R.id.tuesday;
+                    break;
+                case 5:
+                    dayId = R.id.friday;
+                    break;
+                case 6:
+                    dayId = R.id.saturday;
+                    break;
+                case 7:
+                    dayId = R.id.weekday;
+                    break;
+                default:
+                    break;
+            }
+            LinearLayout day = findViewById(dayId);
+            //设定Viewcard
+            // 相对高度参数--校对。。。。。
+            final View v = LayoutInflater.from(this).inflate(R.layout.course_card, null); //加载course_card
+            v.setY(230 * (course.getCourse_start() - 1));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (course.getCourse_end()  - course.getCourse_start()) * 480);
+            v.setLayoutParams(params);
+            TextView text = v.findViewById(R.id.card_text_view);
+            text.setText(course.getCourse_name());
+            day.addView(v);
+        }
+
+
     }
 }

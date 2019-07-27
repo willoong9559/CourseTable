@@ -9,18 +9,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.litepal.LitePal;
-import org.litepal.crud.LitePalSupport;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private LinearLayout ll;
+    int height;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +38,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button daoru = (Button) findViewById(R.id.daoru);
         Button fenxiang = (Button) findViewById(R.id.fenxiang);
         Button youg = (Button) findViewById(R.id.youg);
+        final LinearLayout ll = (LinearLayout) findViewById(R.id.monday);
+        ll.post(new Runnable(){
+            public void run(){
+                height = ll.getHeight();
+                Log.d("timer", String.valueOf(height));
+                //调用数据库渲染课程
+                loadData();
+            }
+        });
+
         zuog.setOnClickListener(this);
         tianjia.setOnClickListener(this);
         daoru.setOnClickListener(this);
         fenxiang.setOnClickListener(this);
         youg.setOnClickListener(this);
-
-        //从数据库中读取数据
-        loadData();
-        //craeteCourseView(); //test校参
 
 
         //工具条隐藏
@@ -59,6 +70,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         calendar.get(Calendar.SECOND))*/
         textView_1.setText(format(calendar.get(Calendar.MONTH)+1));
         textView_2.setText(format(calendar.get(Calendar.MONTH)+1) + "月" + calendar.get(Calendar.DAY_OF_MONTH) + "日");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LinearLayout content = (LinearLayout) findViewById(R.id.monday);
+        content.measure(0,0);
+        int height = content.getMeasuredHeight();
+        Log.d("除法", String.valueOf(height));
     }
 
     /* 格式化字符串(7:3->07:03) */
@@ -84,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void loadData() {
         List<Course> courses = LitePal.findAll(Course.class);
-
         for (Course course : courses) {
             //动态设定并加载view
             craeteCourseView(course);
@@ -108,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     dayId = R.id.wednesday;
                     break;
                 case 4:
-                    dayId = R.id.tuesday;
+                    dayId = R.id.thursday;
                     break;
                 case 5:
                     dayId = R.id.friday;
@@ -123,17 +142,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
             }
             LinearLayout day = findViewById(dayId);
+
             //设定Viewcard
-            // 相对高度参数--校对。。。。。
-            final View v = LayoutInflater.from(this).inflate(R.layout.course_card, null); //加载course_card
-            v.setY(230 * (course.getCourse_start() - 1));
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (course.getCourse_end()  - course.getCourse_start()) * 480);
+            View v = LayoutInflater.from(this).inflate(R.layout.course_card, null); //加载course_card
+            LinearLayout content = (LinearLayout) findViewById(R.id.monday);
+            v.setY(height / 10 * (course.getCourse_start() - 1));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (course.getCourse_end()  - course.getCourse_start() + 1) * height / 10);
             v.setLayoutParams(params);
             TextView text = v.findViewById(R.id.card_text_view);
-            text.setText(course.getCourse_name());
+            text.setText(course.getCourse_name() + "\n" + course.getClassroom() + "\n" + course.getTeacher_name());//显示课程信息
             day.addView(v);
+            //删除课程
         }
-
-
     }
 }

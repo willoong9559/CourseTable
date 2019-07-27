@@ -16,6 +16,16 @@ public class Course extends LitePalSupport {
 
     private String teacher_name;
 
+    private int bujuID;
+
+    public void setBujuID(int bujuID) {
+        this.bujuID = bujuID;
+    }
+
+    public int getBujuID() {
+        return bujuID;
+    }
+
     public String getCourse_name() {
         return course_name;
     }

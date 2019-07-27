@@ -38,15 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button daoru = (Button) findViewById(R.id.daoru);
         Button fenxiang = (Button) findViewById(R.id.fenxiang);
         Button youg = (Button) findViewById(R.id.youg);
-        final LinearLayout ll = (LinearLayout) findViewById(R.id.monday);
-        ll.post(new Runnable(){
-            public void run(){
-                height = ll.getHeight();
-                Log.d("timer", String.valueOf(height));
-                //调用数据库渲染课程
-                loadData();
-            }
-        });
 
         zuog.setOnClickListener(this);
         tianjia.setOnClickListener(this);
@@ -77,8 +68,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
         LinearLayout content = (LinearLayout) findViewById(R.id.monday);
         content.measure(0,0);
-        int height = content.getMeasuredHeight();
-        Log.d("除法", String.valueOf(height));
+        final LinearLayout ll = (LinearLayout) findViewById(R.id.monday);
+        ll.post(new Runnable(){
+            public void run(){
+                height = ll.getHeight();
+                Log.d("timer", String.valueOf(height));
+                //调用数据库渲染课程
+                loadData();
+            }
+        });
     }
 
     /* 格式化字符串(7:3->07:03) */

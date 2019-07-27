@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fenxiang.setOnClickListener(this);
         youg.setOnClickListener(this);
         //动态测量
-        final LinearLayout ll = (LinearLayout) findViewById(R.id.monday);
+        final RelativeLayout ll = (RelativeLayout) findViewById(R.id.monday);
         ll.post(new Runnable(){
             public void run(){
                 height = ll.getHeight();
@@ -70,15 +71,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         calendar.get(Calendar.HOUR_OF_DAY))
         calendar.get(Calendar.MINUTE))
         calendar.get(Calendar.SECOND))*/
-        textView_1.setText(format(calendar.get(Calendar.MONTH)+1));
+        textView_1.setText(format(calendar.get(Calendar.DAY_OF_MONTH)));
         textView_2.setText(format(calendar.get(Calendar.MONTH)+1) + "月" + calendar.get(Calendar.DAY_OF_MONTH) + "日");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        LinearLayout content = (LinearLayout) findViewById(R.id.monday);
-        content.measure(0,0);
+        //LinearLayout content = () findViewById(R.id.monday);
+        //content.measure(0,0);
     }
 
     /* 格式化字符串(7:3->07:03) */
@@ -126,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
     //Course course
-    private void craeteCourseView(Course course) {
+    private void craeteCourseView(final Course course) {
         int getDay = course.getDay();
         if (getDay < 1 || getDay > 7 || course.getCourse_start() > course.getCourse_end()) {
             Toast.makeText(MainActivity.this, "emm...请不要输入错误的数据", Toast.LENGTH_SHORT).show();
@@ -157,11 +158,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 default:
                     break;
             }
-            final LinearLayout day = findViewById(dayId);
+            final RelativeLayout day = findViewById(dayId);
 
             //设定Viewcard
             View v = LayoutInflater.from(this).inflate(R.layout.course_card, null); //加载course_card
-            LinearLayout content = (LinearLayout) findViewById(R.id.monday);
+            RelativeLayout content = (RelativeLayout) findViewById(R.id.monday);
             v.setY(height / 10 * (course.getCourse_start() - 1));
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (course.getCourse_end() - course.getCourse_start() + 1) * height / 10);
             v.setLayoutParams(params);
@@ -171,8 +172,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //删除课程
             v.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public boolean onLongClick(View v) {
+                public boolean onLongClick(View view) {
+                    Log.d("ss", String.valueOf(course.getCourse_start()));
                     Intent intent = new Intent(MainActivity.this, DeleteCourse.class);
+                    Bundle bd = new Bundle();
+                    bd.putInt("start", course.getCourse_start());
+                    bd.putInt("end", course.getCourse_end());
+                    bd.putInt("day", course.getDay());
+                    intent.putExtras(bd);
                     startActivity(intent);
                     return true;
                 }

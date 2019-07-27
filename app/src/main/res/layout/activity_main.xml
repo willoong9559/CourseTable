@@ -180,61 +180,68 @@
         </LinearLayout>
 
         <!--课程布局-->
-        <LinearLayout
+        <RelativeLayout
             android:orientation="vertical"
             android:id="@+id/monday"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
-        </LinearLayout>
+            android:layout_weight="1"
+            android:layout_margin="1dp">
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:orientation="vertical"
             android:id="@+id/tuesday"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
-        </LinearLayout>
-        <LinearLayout
+            android:layout_weight="1"
+            android:layout_margin="1dp">
+        </RelativeLayout>
+
+        <RelativeLayout
             android:orientation="vertical"
             android:id="@+id/wednesday"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_margin="1dp">
+        </RelativeLayout>
 
-        </LinearLayout>
-        <LinearLayout
+        <RelativeLayout
             android:orientation="vertical"
             android:id="@+id/thursday"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_margin="1dp">
+        </RelativeLayout>
 
-        </LinearLayout>
-        <LinearLayout
+        <RelativeLayout
             android:orientation="vertical"
             android:id="@+id/friday"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_margin="1dp">
+        </RelativeLayout>
 
-        </LinearLayout>
-        <LinearLayout
+        <RelativeLayout
             android:orientation="vertical"
             android:id="@+id/saturday"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_margin="1dp">
+        </RelativeLayout>
 
-        </LinearLayout>
-        <LinearLayout
+        <RelativeLayout
             android:orientation="vertical"
             android:id="@+id/weekday"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
-
-        </LinearLayout>
+            android:layout_weight="1"
+            android:layout_margin="1dp">
+        </RelativeLayout>
 
 
         </LinearLayout>

@@ -10,7 +10,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddCourse"></activity>
+
+        <activity
+            android:name=".DeleteCourse"
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+
+        <activity
+            android:name=".about_me"
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+        <activity android:name=".AddCourse" />
         <activity android:name=".youg" />
         <activity android:name=".MainActivity">
             <intent-filter>

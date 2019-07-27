@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,8 +25,8 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private int height;
     private LinearLayout ll;
-    int height;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         daoru.setOnClickListener(this);
         fenxiang.setOnClickListener(this);
         youg.setOnClickListener(this);
+        //动态测量
+        final LinearLayout ll = (LinearLayout) findViewById(R.id.monday);
+        ll.post(new Runnable(){
+            public void run(){
+                height = ll.getHeight();
+                Log.d("timer", String.valueOf(height));
+                //调用数据库渲染课程
+                loadData();
+            }
+        });
 
 
         //工具条隐藏
@@ -68,15 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
         LinearLayout content = (LinearLayout) findViewById(R.id.monday);
         content.measure(0,0);
-        final LinearLayout ll = (LinearLayout) findViewById(R.id.monday);
-        ll.post(new Runnable(){
-            public void run(){
-                height = ll.getHeight();
-                Log.d("timer", String.valueOf(height));
-                //调用数据库渲染课程
-                loadData();
-            }
-        });
     }
 
     /* 格式化字符串(7:3->07:03) */
@@ -96,7 +98,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.fenxiang :
-                Toast.makeText(MainActivity.this, "傻子，这还没写呢！！！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "预留Button，暂时还没写！！！", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.youg :
+                Intent intent1 = new Intent(this, about_me.class);
+                startActivity(intent1);
+                break;
+
+            case R.id.zuog :
+                Toast.makeText(MainActivity.this, "计划Button，施工中！！！", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.daoru :
+                Toast.makeText(MainActivity.this, "计划Button，施工中！！！", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
         }
     }
 
@@ -139,18 +157,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 default:
                     break;
             }
-            LinearLayout day = findViewById(dayId);
+            final LinearLayout day = findViewById(dayId);
 
             //设定Viewcard
             View v = LayoutInflater.from(this).inflate(R.layout.course_card, null); //加载course_card
             LinearLayout content = (LinearLayout) findViewById(R.id.monday);
             v.setY(height / 10 * (course.getCourse_start() - 1));
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (course.getCourse_end()  - course.getCourse_start() + 1) * height / 10);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (course.getCourse_end() - course.getCourse_start() + 1) * height / 10);
             v.setLayoutParams(params);
             TextView text = v.findViewById(R.id.card_text_view);
             text.setText(course.getCourse_name() + "\n" + course.getClassroom() + "\n" + course.getTeacher_name());//显示课程信息
             day.addView(v);
             //删除课程
+            v.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, DeleteCourse.class);
+                    startActivity(intent);
+                    return true;
+                }
+            });
         }
     }
+
 }

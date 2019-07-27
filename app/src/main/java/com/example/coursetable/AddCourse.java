@@ -16,7 +16,6 @@ import java.util.List;
 
 public class AddCourse extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +46,11 @@ public class AddCourse extends AppCompatActivity {
                 course.setClassroom(classroom);
                 course.setTeacher_name(teacherName);
                 course.save();
+                Intent intent = new Intent(AddCourse.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
-
-
 
     }
 
